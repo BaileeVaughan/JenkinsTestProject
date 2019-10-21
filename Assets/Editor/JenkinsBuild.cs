@@ -16,60 +16,21 @@ public class JenkinsBuild
     // ------------------------------------------------------------------------
     // called from Jenkins
     // ------------------------------------------------------------------------
-    [MenuItem("Build/Android")]
-    public static void BuildAndroid()
+    [MenuItem("Build/Windows")]
+    public static void BuildWindows()
     {
-        string appName = "BBBalls-Release";
-        string targetDir = "Builds/Android";
-
-        // find: -executeMethod
-        //   +1: JenkinsBuild.BuildMacOS
-        //   +2: VRDungeons
-        //   +3: /Users/Shared/Jenkins/Home/jobs/VRDungeons/builds/47/output
-
-        string[] args = System.Environment.GetCommandLineArgs();
-        for (int i = 0; i < args.Length; i++)
-        {
-            if (args[i] == "-executeMethod")
-            {
-                if (i + 3 < args.Length)
-                {
-                    // Android method is args[i+1]
-                    appName = args[i + 2];
-                    targetDir = args[i + 3];
-                    break;
-                    for (int x = 0; x < args.Length; x++)
-                    {
-                        System.Console.WriteLine("Argument " + x + ": " + args[x]);
-                    }
-                }
-                else
-                {
-                    for (int x = 0; x < args.Length; x++)
-                    {
-                        System.Console.WriteLine("Argument " + x + ": " + args[x]);
-                    }
-                    throw new System.Exception("[JenkinsBuild] Incorrect Parameters for -executeMethod Format: -executeMethod Android <app name> <output dir>");
-                }
-            }
-        }
-
-        // e.g. // /Users/Shared/Jenkins/Home/jobs/VRDungeons/builds/47/output/VRDungeons.app
+        string appName = "JenkinsTestProject-Release";
+        string targetDir = "Builds/Windows";
         string fullPathAndName = targetDir + System.IO.Path.DirectorySeparatorChar + appName + ".apk";
-        BuildProject(EnabledScenes, fullPathAndName, BuildTargetGroup.Standalone, BuildTarget.Android, BuildOptions.None);
+        BuildProject(EnabledScenes, fullPathAndName, BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows, BuildOptions.None);
     }
 
     [MenuItem("Build/MacOS")]
     public static void BuildMacOS()
     {
 
-        string appName = "TestProject";
+        string appName = "JenkinsTestProject";
         string targetDir = "~/Desktop";
-
-        // find: -executeMethod
-        //   +1: JenkinsBuild.BuildMacOS
-        //   +2: VRDungeons
-        //   +3: /Users/Shared/Jenkins/Home/jobs/VRDungeons/builds/47/output
         string[] args = System.Environment.GetCommandLineArgs();
         for (int i = 0; i < args.Length; i++)
         {
@@ -91,8 +52,6 @@ public class JenkinsBuild
                 }
             }
         }
-
-        // e.g. // /Users/Shared/Jenkins/Home/jobs/VRDungeons/builds/47/output/VRDungeons.app
         string fullPathAndName = targetDir + System.IO.Path.DirectorySeparatorChar + appName + ".app";
         BuildProject(EnabledScenes, fullPathAndName, BuildTargetGroup.Standalone, BuildTarget.StandaloneOSX, BuildOptions.None);
     }
