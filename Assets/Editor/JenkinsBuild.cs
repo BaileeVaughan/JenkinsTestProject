@@ -11,7 +11,6 @@ using UnityEditor.Build.Reporting;
 // ------------------------------------------------------------------------
 public class JenkinsBuild
 {
-
     static string[] EnabledScenes = FindEnabledEditorScenes();
     // ------------------------------------------------------------------------
     // called from Jenkins
@@ -21,7 +20,7 @@ public class JenkinsBuild
     {
         string appName = "JenkinsTestProject-Release";
         string targetDir = "Builds/Windows";
-        string fullPathAndName = targetDir + System.IO.Path.DirectorySeparatorChar + appName + ".apk";
+        string fullPathAndName = targetDir + System.IO.Path.DirectorySeparatorChar + appName + ".exe";
         BuildProject(EnabledScenes, fullPathAndName, BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows, BuildOptions.None);
     }
 
